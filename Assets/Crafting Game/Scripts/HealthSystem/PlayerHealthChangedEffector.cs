@@ -11,6 +11,7 @@ namespace CraftingGame
         [SerializeField] private SpriteRenderer whiteRenderer;
         [SerializeField] private ParticleSystem dieFx;
         [SerializeField] private ParticleSystem healingFx;
+        [SerializeField] private float delayedDieDuration = 1;
         [SerializeField] private float flashDuration = 0.3f;
 
         public override void DoHitEffect(Vector3 hitDirection)
@@ -31,7 +32,7 @@ namespace CraftingGame
         public override void DoDieEffect()
         {
             Instantiate(dieFx.gameObject, transform.position, transform.rotation);
-            Destroy(gameObject);
+            DOVirtual.DelayedCall(delayedDieDuration, () => Destroy(gameObject));
         }
 
         public override void DoHealEffect()

@@ -158,8 +158,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController2D: {fileID: 275291251}
   whiteRenderer: {fileID: 1693756433}
-  dieFx: {fileID: 0}
+  dieFx: {fileID: 5858441624264552811, guid: e8198c1dc093cb54c93c0e1b2b6f605d, type: 3}
   healingFx: {fileID: 0}
+  delayedDieDuration: 0
   flashDuration: 0.05
 --- !u!114 &275291253
 MonoBehaviour:
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthChangedEffectorBase: {fileID: 275291252}
-  invincibleCooldownTime: 1
+  invincibleCooldownTime: 0.5
   <Health>k__BackingField: 5
 --- !u!1 &293937858
 GameObject:
