@@ -316,5 +316,11 @@ namespace CraftingGame
             wallCheck.localPosition =
                 new Vector3(Mathf.Abs(wallCheck.localPosition.x), wallCheck.localPosition.y, 0);
         }
+
+        public void Knockback(Vector3 direction)
+        {
+            rigidbody2D.velocity = Vector2.zero;
+            rigidbody2D.AddForce(direction * 40);
+        }
     }
 }
