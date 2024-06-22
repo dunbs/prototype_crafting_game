@@ -155,119 +155,119 @@ namespace CraftingGame
 
         public void Move(float move, bool jump, bool dash)
         {
-            if (canMove)
+            if (!canMove) return;
+
+            if (dash && canDash && !isWallSliding)
             {
-                if (dash && canDash && !isWallSliding)
-                {
-                    StartCoroutine(DashCooldown());
-                }
+                StartCoroutine(DashCooldown());
+            }
 
-                // If crouching, check to see if the character can stand up
-                if (isDashing)
-                {
-                    rigidbody2D.velocity = new Vector2(transform.localScale.x * m_DashForce, 0);
-                }
-                //only control the player if grounded or airControl is turned on
-                else if (isGrounded || airControl)
-                {
-                    if (rigidbody2D.velocity.y < -limitFallSpeed)
-                        rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, -limitFallSpeed);
-                    // Move the character by finding the target velocity
-                    Vector3 targetVelocity = new Vector2(move * 10f, rigidbody2D.velocity.y);
-                    // And then smoothing it out and applying it to the character
-                    rigidbody2D.velocity = Vector3.SmoothDamp(
-                        rigidbody2D.velocity,
-                        targetVelocity,
-                        ref velocity,
-                        movementSmoothing);
+            // If crouching, check to see if the character can stand up
+            if (isDashing)
+            {
+                rigidbody2D.velocity = new Vector2(transform.localScale.x * m_DashForce, 0);
+            }
 
-                    // If the input is moving the player right and the player is facing left...
-                    if (move > 0 && !facingRight && !isWallSliding)
-                    {
-                        // ... flip the player.
-                        Flip();
-                    }
-                    // Otherwise if the input is moving the player left and the player is facing right...
-                    else if (move < 0 && facingRight && !isWallSliding)
-                    {
-                        // ... flip the player.
-                        Flip();
-                    }
-                }
+            //only control the player if grounded or airControl is turned on
+            else if (isGrounded || airControl)
+            {
+                if (rigidbody2D.velocity.y < -limitFallSpeed)
+                    rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, -limitFallSpeed);
+                // Move the character by finding the target velocity
+                Vector3 targetVelocity = new Vector2(move * 10f, rigidbody2D.velocity.y);
+                // And then smoothing it out and applying it to the character
+                rigidbody2D.velocity = Vector3.SmoothDamp(
+                    rigidbody2D.velocity,
+                    targetVelocity,
+                    ref velocity,
+                    movementSmoothing);
 
-                // If the player should jump...
-                if (isGrounded && jump)
+                // If the input is moving the player right and the player is facing left...
+                if (move > 0 && !facingRight && !isWallSliding)
                 {
-                    // Add a vertical force to the player.
-                    isGrounded = false;
-                    rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+                    // ... flip the player.
+                    Flip();
+                }
+                // Otherwise if the input is moving the player left and the player is facing right...
+                else if (move < 0 && facingRight && !isWallSliding)
+                {
+                    // ... flip the player.
+                    Flip();
+                }
+            }
+
+            // If the player should jump...
+            if (isGrounded && jump)
+            {
+                // Add a vertical force to the player.
+                isGrounded = false;
+                rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+                canDoubleJump = true;
+            }
+            else if (!isGrounded && jump && canDoubleJump && !isWallSliding)
+            {
+                canDoubleJump = false;
+                rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
+                rigidbody2D.AddForce(new Vector2(0f, jumpForce / 1.2f));
+            }
+
+            else if (isWall && !isGrounded)
+            {
+                if (!wasWallSlidding && rigidbody2D.velocity.y < 0 || isDashing)
+                {
+                    isWallSliding = true;
+                    wallCheck.localPosition =
+                        new Vector3(-wallCheck.localPosition.x, wallCheck.localPosition.y, 0);
+                    Flip();
+                    StartCoroutine(WaitForDashCooldown(0.1f));
                     canDoubleJump = true;
                 }
-                else if (!isGrounded && jump && canDoubleJump && !isWallSliding)
+
+                isDashing = false;
+
+                if (isWallSliding)
                 {
-                    canDoubleJump = false;
-                    rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
-                    rigidbody2D.AddForce(new Vector2(0f, jumpForce / 1.2f));
+                    if (move * transform.localScale.x > 0.1f)
+                    {
+                        StartCoroutine(WaitToEndSliding());
+                    }
+                    else
+                    {
+                        wasWallSlidding = true;
+                        rigidbody2D.velocity = new Vector2(-transform.localScale.x * 2, -5);
+                    }
                 }
 
-                else if (isWall && !isGrounded)
+                if (jump && isWallSliding)
                 {
-                    if (!wasWallSlidding && rigidbody2D.velocity.y < 0 || isDashing)
-                    {
-                        isWallSliding = true;
-                        wallCheck.localPosition =
-                            new Vector3(-wallCheck.localPosition.x, wallCheck.localPosition.y, 0);
-                        Flip();
-                        StartCoroutine(WaitForDashCooldown(0.1f));
-                        canDoubleJump = true;
-                    }
-
-                    isDashing = false;
-
-                    if (isWallSliding)
-                    {
-                        if (move * transform.localScale.x > 0.1f)
-                        {
-                            StartCoroutine(WaitToEndSliding());
-                        }
-                        else
-                        {
-                            wasWallSlidding = true;
-                            rigidbody2D.velocity = new Vector2(-transform.localScale.x * 2, -5);
-                        }
-                    }
-
-                    if (jump && isWallSliding)
-                    {
-                        rigidbody2D.velocity = new Vector2(0f, 0f);
-                        rigidbody2D.AddForce(new Vector2(transform.localScale.x * jumpForce * 1.2f, jumpForce));
-                        jumpWallStartX = transform.position.x;
-                        limitVelocityOnWallJump = true;
-                        canDoubleJump = true;
-                        isWallSliding = false;
-                        wasWallSlidding = false;
-                        wallCheck.localPosition = new Vector3(Mathf.Abs(wallCheck.localPosition.x),
-                            wallCheck.localPosition.y, 0);
-                        canMove = false;
-                    }
-                    else if (dash && canDash)
-                    {
-                        isWallSliding = false;
-                        wasWallSlidding = false;
-                        wallCheck.localPosition = new Vector3(Mathf.Abs(wallCheck.localPosition.x),
-                            wallCheck.localPosition.y, 0);
-                        canDoubleJump = true;
-                        StartCoroutine(DashCooldown());
-                    }
+                    rigidbody2D.velocity = new Vector2(0f, 0f);
+                    rigidbody2D.AddForce(new Vector2(transform.localScale.x * jumpForce * 1.2f, jumpForce));
+                    jumpWallStartX = transform.position.x;
+                    limitVelocityOnWallJump = true;
+                    canDoubleJump = true;
+                    isWallSliding = false;
+                    wasWallSlidding = false;
+                    wallCheck.localPosition = new Vector3(Mathf.Abs(wallCheck.localPosition.x),
+                        wallCheck.localPosition.y, 0);
+                    canMove = false;
                 }
-                else if (isWallSliding && !isWall && canSlide)
+                else if (dash && canDash)
                 {
                     isWallSliding = false;
                     wasWallSlidding = false;
                     wallCheck.localPosition = new Vector3(Mathf.Abs(wallCheck.localPosition.x),
                         wallCheck.localPosition.y, 0);
                     canDoubleJump = true;
+                    StartCoroutine(DashCooldown());
                 }
+            }
+            else if (isWallSliding && !isWall && canSlide)
+            {
+                isWallSliding = false;
+                wasWallSlidding = false;
+                wallCheck.localPosition = new Vector3(Mathf.Abs(wallCheck.localPosition.x),
+                    wallCheck.localPosition.y, 0);
+                canDoubleJump = true;
             }
         }
 

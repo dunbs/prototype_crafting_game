@@ -24,10 +24,19 @@ namespace CraftingGame
         private void Awake()
         {
             simpleControls = new SimpleControls();
-            simpleControls.Enable();
             gameplayActions = simpleControls.gameplay;
             gameplayActions.Jump.performed += _ => jump = true;
             gameplayActions.dash.performed += _ => dash = true;
+        }
+
+        private void OnEnable()
+        {
+            simpleControls.Enable();
+        }
+
+        private void OnDisable()
+        {
+            simpleControls.Disable();
         }
 
         private void Update()
