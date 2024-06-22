@@ -20,7 +20,7 @@ namespace CraftingGame
 
             float healthBefore = Health;
 
-            if (Health < damage)
+            if (Health <= damage)
             {
                 Health = 0;
                 Kill();

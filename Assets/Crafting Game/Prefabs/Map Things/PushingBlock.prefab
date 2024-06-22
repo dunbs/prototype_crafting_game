@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 88238655413910191}
   - component: {fileID: 7093332991875474867}
+  - component: {fileID: 4348978143849789636}
   m_Layer: 0
   m_Name: PushingBlock
   m_TagString: Untagged
@@ -60,6 +61,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4348978143849789636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726096059501562425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e604bc12d2f04f6b97fd658363662b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  minimumForce: 35
+  rigidbody2D: {fileID: 7093332991875474867}
 --- !u!1 &7844408674301398294
 GameObject:
   m_ObjectHideFlags: 0
