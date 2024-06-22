@@ -18,6 +18,8 @@ namespace CraftingGame
         private bool jump;
         private bool dash;
         private static readonly int IsGroundedHashed = Animator.StringToHash("IsGrounded");
+        private static readonly int SpeedHashed = Animator.StringToHash("Speed");
+        private static readonly int VSpeedHashed = Animator.StringToHash("vSpeed");
 
         private void Awake()
         {
@@ -32,8 +34,8 @@ namespace CraftingGame
         {
             horizontalMovement += gameplayActions.move.ReadValue<Vector2>().x * runSpeed * Time.deltaTime;
             animator.SetBool(IsGroundedHashed, characterController2D.IsGrounded);
-            animator.SetFloat("Speed", Mathf.Abs(characterController2D.Velocity.x));
-            animator.SetFloat("vSpeed", characterController2D.Velocity.y);
+            animator.SetFloat(SpeedHashed, Mathf.Abs(characterController2D.Velocity.x));
+            animator.SetFloat(VSpeedHashed, characterController2D.Velocity.y);
         }
 
         private void FixedUpdate()
