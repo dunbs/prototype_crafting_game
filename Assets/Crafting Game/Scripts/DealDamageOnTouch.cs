@@ -13,8 +13,6 @@ namespace CraftingGame
                 ? other.rigidbody.GetComponent<IDamageable>()
                 : other.collider.GetComponent<IDamageable>();
 
-            Debug.LogError($"{damageable} {other.collider}", other.collider);
-
             if (damageable == null)
                 return;
 
