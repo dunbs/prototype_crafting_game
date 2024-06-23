@@ -11,6 +11,7 @@ namespace CraftingGame
         [field: SerializeField] public float Health { get; set; }
 
         public event Action<IDamageable.HealthChangedArgs> OnHealthChanged;
+        public event Action<IDamageable.DieArgs> OnDead;
         public bool IsInvincible { get; set; }
 
         public virtual void DealDamage(GameObject attacker, float damage)
@@ -56,6 +57,8 @@ namespace CraftingGame
         public virtual void Kill()
         {
             healthChangedEffectorBase.DoDieEffect();
+            //TODO No attacker right now, but so far that's all we need, gonna add this when I have time.
+            OnDead?.Invoke(new IDamageable.DieArgs());
         }
     }
 }

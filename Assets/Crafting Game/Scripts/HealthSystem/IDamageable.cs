@@ -19,8 +19,14 @@ namespace CraftingGame
             }
         }
 
+        public struct DieArgs
+        {
+            public readonly GameObject attacker;
+        }
+
         float Health { get; }
         event Action<HealthChangedArgs> OnHealthChanged;
+        event Action<DieArgs> OnDead;
         void DealDamage(UnityEngine.GameObject attacker, float damage);
         void Heal(float amount);
         void Kill();

@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  minimumForce: 35
+  minimumForce: 60
   rigidbody2D: {fileID: 7093332991875474867}
 --- !u!1 &7844408674301398294
 GameObject:
