@@ -24,6 +24,7 @@ namespace CraftingGame
             public readonly GameObject attacker;
         }
 
+        float MaxHealth { get; }
         float Health { get; }
         event Action<HealthChangedArgs> OnHealthChanged;
         event Action<DieArgs> OnDead;

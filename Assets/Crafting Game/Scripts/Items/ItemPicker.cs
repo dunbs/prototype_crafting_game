@@ -14,7 +14,6 @@ namespace CraftingGame
             {
                 inventory.AddToInventory(item.ItemBlueprint);
                 item.GetPickedUp();
-                Debug.LogError(item, other);
             }
         }
     }

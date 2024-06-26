@@ -8,11 +8,18 @@ namespace CraftingGame
     {
         [SerializeField] private HealthChangedEffectorBase healthChangedEffectorBase;
         [SerializeField] private float invincibleCooldownTime = 0f;
-        [field: SerializeField] public float Health { get; set; }
+        [field: SerializeField] public float MaxHealth { get; set; } = 1;
 
         public event Action<IDamageable.HealthChangedArgs> OnHealthChanged;
         public event Action<IDamageable.DieArgs> OnDead;
         public bool IsInvincible { get; set; }
+        public float Health { get; set; }
+
+        private void Awake()
+        {
+            Health = MaxHealth;
+            Debug.LogError(Health, this);
+        }
 
         public virtual void DealDamage(GameObject attacker, float damage)
         {
