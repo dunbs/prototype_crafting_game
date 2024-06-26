@@ -10,6 +10,7 @@ namespace CraftingGame
             public readonly float Before;
             public readonly float After;
             public readonly float ChangedAmount;
+            // TODO consider adding MaxHealth
 
             public HealthChangedArgs(float before, float after, float changedAmount)
             {

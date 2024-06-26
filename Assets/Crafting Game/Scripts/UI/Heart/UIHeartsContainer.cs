@@ -45,7 +45,6 @@ namespace CraftingGame
             UpdateMaxHealth();
 
             int health = Mathf.RoundToInt(damageableVariable.Value.MaxHealth);
-            Debug.LogError(damageableVariable.Value.Health);
             for (var i = 0; i < health; i++)
             {
                 points[i].SetActive(i < damageableVariable.Value.Health);

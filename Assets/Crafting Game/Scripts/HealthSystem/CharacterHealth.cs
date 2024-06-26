@@ -18,7 +18,7 @@ namespace CraftingGame
         private void Awake()
         {
             Health = MaxHealth;
-            Debug.LogError(Health, this);
+            OnHealthChanged?.Invoke(new IDamageable.HealthChangedArgs(before: 0, after: Health, Health));
         }
 
         public virtual void DealDamage(GameObject attacker, float damage)
