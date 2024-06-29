@@ -8,7 +8,7 @@ namespace CraftingGame
         public abstract event System.Action<ItemBlueprint> OnItemAdded;
         public abstract event System.Action<ItemBlueprint> OnItemRemoved;
 
-        public abstract IReadOnlyCollection<ItemBlueprint> Items { get; }
+        public abstract IReadOnlyList<ItemBlueprint> Items { get; }
 
         public abstract void AddToInventory(ItemBlueprint item);
 

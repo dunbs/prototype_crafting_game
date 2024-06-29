@@ -10,7 +10,7 @@ namespace CraftingGame
 
         public override event Action<ItemBlueprint> OnItemAdded;
         public override event Action<ItemBlueprint> OnItemRemoved;
-        public override IReadOnlyCollection<ItemBlueprint> Items => items;
+        public override IReadOnlyList<ItemBlueprint> Items => items;
 
         public override void AddToInventory(ItemBlueprint item)
         {
