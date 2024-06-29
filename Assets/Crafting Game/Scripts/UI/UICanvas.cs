@@ -1,15 +1,30 @@
 ﻿using System;
+using UnityAtoms.BaseAtoms;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 namespace CraftingGame
 {
     public abstract class UICanvas : MonoBehaviour
     {
+        [SerializeField] private UIOpenEvent openEvent;
+        [SerializeField] private UICloseEvent closeEvent;
+
         public bool IsOpened => gameObject.activeInHierarchy;
 
         protected virtual void Awake()
         {
+            openEvent.Register(Open);
+            closeEvent.Register(Close);
+
             Close();
+        }
+
+        protected virtual void OnDestroy()
+        {
+            openEvent.Unregister(Open);
+            closeEvent.Unregister(Close);
         }
 
         public virtual void Toggle()
