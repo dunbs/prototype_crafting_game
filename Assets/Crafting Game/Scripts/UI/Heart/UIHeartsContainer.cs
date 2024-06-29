@@ -66,11 +66,11 @@ namespace CraftingGame
                 points.Add(heartPoint);
             }
 
-            for (int i = points.Count; i > maxHealth; i--)
+            for (int i = points.Count - 1; i >= maxHealth; i--)
             {
                 UIHeartPoint point = points[i];
                 points.RemoveAt(i);
-                Destroy(point);
+                Destroy(point.gameObject);
             }
         }
     }

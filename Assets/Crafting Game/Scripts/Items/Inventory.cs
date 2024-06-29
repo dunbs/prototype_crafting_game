@@ -22,7 +22,6 @@ namespace CraftingGame
         {
             items.Remove(item);
             OnItemRemoved?.Invoke(item);
-            ;
         }
     }
 }

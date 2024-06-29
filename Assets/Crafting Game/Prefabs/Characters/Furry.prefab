@@ -105,7 +105,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300028, guid: b04511e046b4ac64cbb6cddf651a9c3a, type: 3}
   m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
   m_FlipX: 0
@@ -240,7 +240,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 17
+  m_SortingOrder: 11
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   m_FlipX: 0
@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 7023995804136738355}
   - component: {fileID: 6661389999167253812}
   - component: {fileID: 1335698153117730832}
+  - component: {fileID: 7866035477938511834}
   m_Layer: 3
   m_Name: Furry
   m_TagString: Player
@@ -614,6 +615,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageableVariable: {fileID: 11400000, guid: bffca75d6afe77b41aadee5cc27d8eb4, type: 2}
+--- !u!114 &7866035477938511834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5723571050336972057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34ffe55adb84ea1a8e46542937f29ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryBaseVariable: {fileID: 11400000, guid: e7f62a08341be954c82d4cdbf282b9ab, type: 2}
 --- !u!1 &8964441619441187550
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,20 +11,23 @@ namespace CraftingGame
         [SerializeField] private UIOpenEvent openEvent;
         [SerializeField] private UICloseEvent closeEvent;
 
+        [SerializeField] private UIOnOpenedEvent onOpenedEvent;
+        [SerializeField] private UIOnClosedEvent onClosedEvent;
+
         public bool IsOpened => gameObject.activeInHierarchy;
 
         protected virtual void Awake()
         {
-            openEvent.Register(Open);
-            closeEvent.Register(Close);
+            openEvent?.Register(Open);
+            closeEvent?.Register(Close);
 
             Close();
         }
 
         protected virtual void OnDestroy()
         {
-            openEvent.Unregister(Open);
-            closeEvent.Unregister(Close);
+            openEvent?.Unregister(Open);
+            closeEvent?.Unregister(Close);
         }
 
         public virtual void Toggle()
@@ -35,11 +38,23 @@ namespace CraftingGame
         public virtual void Open()
         {
             gameObject.SetActive(true);
+            InvokeOpenedEvent();
         }
 
         public virtual void Close()
         {
             gameObject.SetActive(false);
+            InvokeClosedEvent();
+        }
+
+        protected void InvokeOpenedEvent()
+        {
+            onOpenedEvent?.Raise();
+        }
+
+        protected void InvokeClosedEvent()
+        {
+            onClosedEvent?.Raise();
         }
     }
 }

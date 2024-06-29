@@ -18,7 +18,7 @@ namespace CraftingGame
         {
             SimpleControls simpleControls = new SimpleControls();
             simpleControls.Enable();
-            simpleControls.gameplay.interact.performed += InteractOnPerformed;
+            simpleControls.gameplay.Inventory.performed += InteractOnPerformed;
             inventoryBaseVariable.Changed.Register(OnInventoryVariableChanged);
             base.Awake();
         }
@@ -57,7 +57,7 @@ namespace CraftingGame
             {
                 var item = inventoryItems[i];
                 var blueprint = items[i];
-                item.SetItem(blueprint);
+                item.SetItem(blueprint, 1);
             }
         }
 
@@ -76,11 +76,11 @@ namespace CraftingGame
                 inventoryItems.Add(item);
             }
 
-            for (int i = inventoryItems.Count; i > count; i--)
+            for (int i = inventoryItems.Count - 1; i >= count; i--)
             {
                 var item = inventoryItems[i];
                 inventoryItems.RemoveAt(i);
-                Destroy(item);
+                Destroy(item.gameObject);
             }
         }
     }
