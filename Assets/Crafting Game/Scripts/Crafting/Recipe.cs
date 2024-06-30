@@ -84,6 +84,11 @@ namespace CraftingGame
             return total;
         }
 
+        public bool IsMoreThanEnough(IEnumerable<ItemBlueprint> items)
+        {
+            return CountMissingItems(items) <= 0;
+        }
+
         public bool IsMatch(IEnumerable<ItemBlueprint> items)
         {
             if (!IsCloseMatch(items))

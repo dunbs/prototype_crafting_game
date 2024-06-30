@@ -8,7 +8,7 @@ namespace CraftingGame
     {
         [SerializeField] private InventoryBaseVariable inventoryBaseVariable;
 
-        public override void SetItem(ItemBlueprint itemBlueprint, int count)
+        public override void SetItem(ItemBlueprint itemBlueprint, int count = 1)
         {
             base.SetItem(itemBlueprint, count);
             var itemCount = inventoryBaseVariable.Value.Items.Count(itemBlueprint.Equals);
