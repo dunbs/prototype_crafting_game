@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityAtoms.CraftingGame;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,7 @@ namespace CraftingGame
 
         private InventoryBase inventory;
         private List<UIInventoryItem> inventoryItems = new();
+        private int equipped;
 
         protected override void Awake()
         {
