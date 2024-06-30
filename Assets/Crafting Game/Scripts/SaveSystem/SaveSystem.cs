@@ -18,6 +18,12 @@ namespace CraftingGame
             {
                 public List<ItemBlueprint> itemBlueprints;
                 public int equipped;
+
+                public Data(List<ItemBlueprint> itemBlueprints, int equipped)
+                {
+                    this.itemBlueprints = itemBlueprints;
+                    this.equipped = equipped;
+                }
             }
 
             private const string KEY = GLOBAL_KEY + "_Inventory";
@@ -32,7 +38,7 @@ namespace CraftingGame
                 var json = PlayerPrefs.GetString(KEY, string.Empty);
                 return !string.IsNullOrWhiteSpace(json)
                     ? JsonUtility.FromJson<Data>(json)
-                    : default;
+                    : new Data(default, -1);
             }
         }
     }

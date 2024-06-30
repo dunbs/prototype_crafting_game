@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,15 @@ namespace CraftingGame
         private ItemBlueprint itemBlueprint;
         private int count;
 
+        public event System.Action<bool> OnSelected;
+
         public ItemBlueprint ItemBlueprint => itemBlueprint;
+
+        private void Awake()
+        {
+            if (selectedOutline)
+                selectedOutline.enabled = false;
+        }
 
         public virtual void SetItem(ItemBlueprint itemBlueprint, int count = 1)
         {
@@ -29,7 +38,16 @@ namespace CraftingGame
 
         public void SetSelected(bool isSelected = true)
         {
-            // TODO: Not functioning yet as it is not needed for the current state
+            if (!selectedOutline) return;
+
+            selectedOutline.enabled = isSelected;
+            OnSelected?.Invoke(isSelected);
+        }
+
+        public void SetSelected_NoRaiseEvent(bool isSelected = true)
+        {
+            if (!selectedOutline) return;
+
             selectedOutline.enabled = isSelected;
         }
     }

@@ -35,9 +35,12 @@ namespace CraftingGame
 
         public override void SetEquipped(int index)
         {
-            Assert.IsTrue(index >= 0 && index < items.Count);
+            Assert.IsTrue(index < items.Count);
             EquippedIndex = index;
-            OnItemEquipped?.Invoke(new EquippedEventArgs(items[index], index));
+            OnItemEquipped?.Invoke(new EquippedEventArgs(
+                index < 0 ? null : items[index],
+                index)
+            );
         }
     }
 }

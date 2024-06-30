@@ -41,8 +41,20 @@ namespace CraftingGame
             inventory = inventoryBase;
             inventory.OnItemAdded += OnItemAdded;
             inventory.OnItemRemoved += OnItemRemoved;
+            inventory.OnItemEquipped += OnItemEquipped;
 
             Refresh();
+        }
+
+        private void OnItemEquipped(InventoryBase.EquippedEventArgs equippedEventArgs)
+        {
+            if (equippedEventArgs.index >= 0)
+            {
+                for (var i = 0; i < inventoryItems.Count; i++)
+                {
+                    inventoryItems[i].SetSelected_NoRaiseEvent(equippedEventArgs.index == i);
+                }
+            }
         }
 
         private void OnItemAdded(ItemBlueprint itemBlueprint)
@@ -69,6 +81,11 @@ namespace CraftingGame
                 var blueprint = items[i];
                 item.SetItem(blueprint, 1);
             }
+
+            if (inventory.EquippedIndex >= 0)
+            {
+                inventoryItems[inventory.EquippedIndex].SetSelected(true);
+            }
         }
 
         private void UpdateMaxItems()
@@ -82,6 +99,22 @@ namespace CraftingGame
             for (int i = inventoryItems.Count; i < count; i++)
             {
                 var item = Instantiate(itemPrefab, itemParent);
+                int inventoryIndex = i;
+                item.OnSelected += selected =>
+                {
+                    if (selected)
+                    {
+                        foreach (UIInventoryItem uiInventoryItem in inventoryItems)
+                        {
+                            if (uiInventoryItem != item)
+                                uiInventoryItem.SetSelected(false);
+                        }
+                    }
+
+                    inventoryBaseVariable.Value.SetEquipped(selected
+                        ? inventoryIndex
+                        : -1); // Should have passed a boolean or use another function, but I am pressured with time
+                };
                 item.transform.SetAsLastSibling();
                 inventoryItems.Add(item);
             }

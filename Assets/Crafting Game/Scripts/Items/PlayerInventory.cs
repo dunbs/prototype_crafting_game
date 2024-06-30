@@ -35,5 +35,16 @@ namespace CraftingGame
                 equipped = EquippedIndex
             });
         }
+
+        public override void SetEquipped(int index)
+        {
+            base.SetEquipped(index);
+            SaveSystem.Inventory.Save(new SaveSystem.Inventory.Data()
+            {
+                itemBlueprints =
+                    Items.ToList(), // Changing the list to protected | Try casting | maybe the linq system has already performed the optimal check
+                equipped = EquippedIndex
+            });
+        }
     }
 }
