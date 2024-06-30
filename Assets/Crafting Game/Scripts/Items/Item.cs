@@ -13,6 +13,8 @@ namespace CraftingGame
         [FormerlySerializedAs("bluePrint")] [SerializeField]
         private ItemBlueprint blueprint;
 
+        private bool isPickedUp;
+
         public override ItemBlueprint ItemBlueprint => blueprint;
 
         public override Rigidbody2D Rigidbody2D
@@ -26,10 +28,14 @@ namespace CraftingGame
             rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
-        public override void GetPickedUp()
+        public override bool GetPickedUp()
         {
+            if (isPickedUp) return false;
+
             Instantiate(particleSystem, transform.position, transform.rotation);
             Destroy(gameObject);
+            isPickedUp = true;
+            return true;
         }
     }
 }

@@ -43,9 +43,17 @@ namespace CraftingGame
             Refresh();
         }
 
-        private void OnItemAdded(ItemBlueprint itemBlueprint) { }
+        private void OnItemAdded(ItemBlueprint itemBlueprint)
+        {
+            // TODO Can be optimized
+            Refresh();
+        }
 
-        private void OnItemRemoved(ItemBlueprint itemBlueprint) { }
+        private void OnItemRemoved(ItemBlueprint itemBlueprint)
+        {
+            // TODO Can be optimized
+            Refresh();
+        }
 
         public void Refresh()
         {

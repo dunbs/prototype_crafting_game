@@ -10,10 +10,9 @@ namespace CraftingGame
         private void OnTriggerEnter2D(Collider2D other)
         {
             Component component = other.attachedRigidbody ? other.attachedRigidbody : other;
-            if (component.TryGetComponent<ItemBase>(out var item))
+            if (component.TryGetComponent<ItemBase>(out var item) && item.GetPickedUp())
             {
                 inventory.AddToInventory(item.ItemBlueprint);
-                item.GetPickedUp();
             }
         }
     }
