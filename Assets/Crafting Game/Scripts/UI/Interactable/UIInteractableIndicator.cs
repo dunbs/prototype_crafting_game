@@ -5,6 +5,12 @@ namespace CraftingGame
 {
     public class UIInteractableIndicator : UICanvas
     {
+        protected override void Awake()
+        {
+            base.Awake();
+            transform.localScale = Vector3.zero;
+        }
+
         public override void Open()
         {
             base.Open();
