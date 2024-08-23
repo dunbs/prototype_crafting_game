@@ -63,6 +63,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2677926498077318170}
+  - {fileID: 4170125651670815874}
   m_Father: {fileID: 3838521308830603160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3272321814248837903
@@ -252,6 +253,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
+--- !u!1 &2763132096385147292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4170125651670815874}
+  m_Layer: 3
+  m_Name: WeaponPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4170125651670815874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2763132096385147292}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.42, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8610742244379584595}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2832959116547654621
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,6 +427,7 @@ GameObject:
   - component: {fileID: 1335698153117730832}
   - component: {fileID: 7866035477938511834}
   - component: {fileID: 5881086527253574272}
+  - component: {fileID: 3720334426571314029}
   m_Layer: 3
   m_Name: Furry
   m_TagString: Player
@@ -635,6 +668,9 @@ MonoBehaviour:
   characterController2D: {fileID: 6784092249335889007}
   animator: {fileID: 5541147427789652762}
   runSpeed: 40
+  inventory: {fileID: 7023995804136738355}
+  animationEventTrigger: {fileID: 3720334426571314029}
+  equipmentPosition: {fileID: 4170125651670815874}
 --- !u!114 &9147619822189424957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthChangedEffectorBase: {fileID: 714268220573279439}
   invincibleCooldownTime: 0.5
-  <MaxHealth>k__BackingField: 3
+  <MaxHealth>k__BackingField: 1
 --- !u!114 &714268220573279439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +783,20 @@ MonoBehaviour:
   checkpointVariable: {fileID: 11400000, guid: 7d7e13a7e09c72e438593d9a8a226fa0, type: 2}
   respawnerPrefab: {fileID: 11400000, guid: 178de41bc9aaff64ea02dcc0eae19cc2, type: 2}
   delay: 1
+--- !u!114 &3720334426571314029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5723571050336972057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ec830a537645dea50eee730df4b98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5541147427789652762}
+  eventReferences: []
 --- !u!1 &8964441619441187550
 GameObject:
   m_ObjectHideFlags: 0

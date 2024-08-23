@@ -84,7 +84,7 @@ namespace CraftingGame
 
             if (inventory.EquippedIndex >= 0)
             {
-                inventoryItems[inventory.EquippedIndex].SetSelected(true);
+                inventoryItems[inventory.EquippedIndex].SetSelected_NoRaiseEvent();
             }
         }
 
@@ -109,11 +109,11 @@ namespace CraftingGame
                             if (uiInventoryItem != item)
                                 uiInventoryItem.SetSelected(false);
                         }
-                    }
 
-                    inventoryBaseVariable.Value.SetEquipped(selected
-                        ? inventoryIndex
-                        : -1); // Should have passed a boolean or use another function, but I am pressured with time
+                        inventoryBaseVariable.Value.SetEquipped(selected
+                            ? inventoryIndex
+                            : -1); // Should have passed a boolean or use another function, but I am pressured with time
+                    }
                 };
                 item.transform.SetAsLastSibling();
                 inventoryItems.Add(item);

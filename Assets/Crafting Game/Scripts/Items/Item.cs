@@ -15,6 +15,12 @@ namespace CraftingGame
 
         private bool isPickedUp;
 
+        public bool IsPickedUp
+        {
+            get => isPickedUp;
+            protected set => isPickedUp = value;
+        }
+
         public override ItemBlueprint ItemBlueprint => blueprint;
 
         public override Rigidbody2D Rigidbody2D

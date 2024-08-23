@@ -80,6 +80,15 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""94c5e1fe-d274-4eeb-acca-4746ee819c60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -291,6 +300,17 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d8689e6-e3c7-4429-84d0-27e0a8a8fc2d"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -305,6 +325,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         m_gameplay_dash = m_gameplay.FindAction("dash", throwIfNotFound: true);
         m_gameplay_Back = m_gameplay.FindAction("Back", throwIfNotFound: true);
         m_gameplay_Inventory = m_gameplay.FindAction("Inventory", throwIfNotFound: true);
+        m_gameplay_Attack = m_gameplay.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -372,6 +393,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_dash;
     private readonly InputAction m_gameplay_Back;
     private readonly InputAction m_gameplay_Inventory;
+    private readonly InputAction m_gameplay_Attack;
     public struct GameplayActions
     {
         private @SimpleControls m_Wrapper;
@@ -382,6 +404,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         public InputAction @dash => m_Wrapper.m_gameplay_dash;
         public InputAction @Back => m_Wrapper.m_gameplay_Back;
         public InputAction @Inventory => m_Wrapper.m_gameplay_Inventory;
+        public InputAction @Attack => m_Wrapper.m_gameplay_Attack;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -409,6 +432,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -431,6 +457,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -456,5 +485,6 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }

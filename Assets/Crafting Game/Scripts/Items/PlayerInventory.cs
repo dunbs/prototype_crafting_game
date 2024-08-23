@@ -22,6 +22,11 @@ namespace CraftingGame
             EquippedIndex = data.equipped;
         }
 
+        private void Start()
+        {
+            SetEquipped(EquippedIndex);
+        }
+
         public override void AddToInventory(ItemBlueprint item)
         {
             base.AddToInventory(item);
