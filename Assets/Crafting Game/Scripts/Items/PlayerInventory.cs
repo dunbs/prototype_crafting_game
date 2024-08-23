@@ -17,11 +17,7 @@ namespace CraftingGame
                 {
                     AddToInventory(itemBlueprintStorage.GetItemWithId(dataItemBlueprintId));
                 }
-
-                // AddRange(itemBlueprintStorage.AllItemBlueprints.Where(item => data.itemBlueprintIds.Contains(item.id)));
             }
-
-            Debug.LogError(string.Join("\n ", Items));
 
             EquippedIndex = data.equipped;
         }
