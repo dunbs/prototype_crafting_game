@@ -680,6 +680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0fdad872b349eebb366045ac6e99d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemBlueprintStorage: {fileID: 11400000, guid: b837debf22a016a4597e37887b31c915, type: 2}
 --- !u!114 &6661389999167253812
 MonoBehaviour:
   m_ObjectHideFlags: 0

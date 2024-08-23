@@ -16,12 +16,12 @@ namespace CraftingGame
             [Serializable]
             public struct Data
             {
-                public List<ItemBlueprint> itemBlueprints;
+                public List<string> itemBlueprintIds;
                 public int equipped;
 
-                public Data(List<ItemBlueprint> itemBlueprints, int equipped)
+                public Data(List<String> itemBlueprintIds, int equipped)
                 {
-                    this.itemBlueprints = itemBlueprints;
+                    this.itemBlueprintIds = itemBlueprintIds;
                     this.equipped = equipped;
                 }
             }
