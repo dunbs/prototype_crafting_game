@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace CraftingGame
@@ -7,9 +8,17 @@ namespace CraftingGame
     {
         [SerializeField] private Path path;
         [SerializeField] private float speed = 20;
+        [SerializeField] private float chasingSpeed = 80;
         [SerializeField] private CharacterController2D characterController2D;
+        [SerializeField] private State state;
 
-        private State state;
+
+        [Header("Chase")]
+        [SerializeField] private Vector2 chaseMaxDistance = new Vector2(10, 1);
+
+        [SerializeField] private DetectionArea detectionArea;
+
+        private bool hasDetectionArea;
 
         private enum State
         {
@@ -17,19 +26,65 @@ namespace CraftingGame
             Chase
         }
 
+        private void Awake()
+        {
+            hasDetectionArea = detectionArea;
+        }
+
         private void Update()
         {
+            state = DecideState();
             switch (state)
             {
                 case State.Moving:
                     DoMovingState();
                     break;
                 case State.Chase:
+                    DoChaseState();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        #region Transitions
+
+        private State DecideState()
+        {
+            if (!hasDetectionArea)
+                return State.Moving;
+
+            switch (state)
+            {
+                case State.Moving:
+                    foreach (var body in detectionArea.BodiesInArea)
+                    {
+                        if (CanChase(body))
+                        {
+                            chaseTarget = body;
+                            return State.Chase;
+                        }
+                    }
+
+                    break;
+                case State.Chase:
+                    if (!CanChase(chaseTarget))
+                    {
+                        chaseTarget = null;
+                        return State.Moving;
+                    }
+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return state;
+        }
+
+        #endregion
+
+        #region Moving
 
         private float nextMovementTimestamp;
 
@@ -62,5 +117,36 @@ namespace CraftingGame
 
             characterController2D.Move((nextPosition - currentPosition).x, false, false);
         }
+
+        #endregion
+
+        #region Chasing
+
+        private Transform chaseTarget;
+
+        private void DoChaseState()
+        {
+            var targetPosition = chaseTarget.position;
+            var currentPosition = transform.position;
+            targetPosition.y = currentPosition.y; // No logic to move upwards yet
+
+            var nextPosition = Vector3.MoveTowards(currentPosition, targetPosition,
+                chasingSpeed * Time.deltaTime);
+
+            characterController2D.Move((nextPosition - currentPosition).x, false, false);
+        }
+
+        private bool CanChase(Transform target)
+        {
+            if (!target) return false;
+
+            var targetPosition = target.position;
+            var currentPosition = transform.position;
+            return targetPosition.x - currentPosition.x < chaseMaxDistance.x &&
+                   targetPosition.y - currentPosition.y < chaseMaxDistance.y &&
+                   detectionArea.BodiesInArea.Contains(target);
+        }
+
+        #endregion
     }
 }

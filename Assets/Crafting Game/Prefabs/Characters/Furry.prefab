@@ -535,9 +535,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: -0.23}
+  m_Offset: {x: -0.030000001, y: -0.31059054}
   serializedVersion: 2
-  m_Radius: 0.34
+  m_Radius: 0.42059055
 --- !u!212 &6261350681786395549
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -622,9 +622,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.09}
+  m_Offset: {x: 0, y: 0.0068097115}
   serializedVersion: 2
-  m_Radius: 0.66
+  m_Radius: 0.7431903
 --- !u!114 &6784092249335889007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -796,7 +796,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5541147427789652762}
-  eventReferences: []
+  eventReferences:
+  - eventName: OnAttack
+    layer: 0
+    minWeight: 0
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  - eventName: OnAttackFinished
+    layer: 0
+    minWeight: 0
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &8964441619441187550
 GameObject:
   m_ObjectHideFlags: 0
