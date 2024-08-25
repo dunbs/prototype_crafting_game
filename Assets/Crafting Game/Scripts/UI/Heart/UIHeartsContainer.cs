@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityAtoms.CraftingGame.AtomEvents;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -17,6 +18,11 @@ namespace CraftingGame
         private void Awake()
         {
             damageableVariable.Changed.Register(OnDamageableValue);
+        }
+
+        private void Start()
+        {
+            OnDamageableValue(damageableVariable.Value);
         }
 
         private void OnDamageableValue(IDamageable obj)
