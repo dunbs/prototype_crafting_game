@@ -21,7 +21,7 @@ namespace CraftingGame
             Health = MaxHealth;
         }
 
-        public void DealDamage(GameObject attacker, float damage)
+        public void DealDamage(GameObject attacker, float damage, bool useDieEffect = false)
         {
             var previousHealth = Health;
             Health -= damage;

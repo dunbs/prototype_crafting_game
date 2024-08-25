@@ -75,6 +75,17 @@ namespace CraftingGame
 
         public Vector2 Velocity => rigidbody2D.velocity;
 
+        private void OnEnable()
+        {
+            canDash = true;
+            isDashing = false;
+            isWall = false;
+            isWallSliding = false;
+            wasWallSlidding = false;
+            prevVelocityX = 0f;
+            canSlide = false;
+        }
+
         private void Awake()
         {
             rigidbody2D = GetComponent<Rigidbody2D>();

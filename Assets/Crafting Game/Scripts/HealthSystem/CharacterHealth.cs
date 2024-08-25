@@ -22,11 +22,13 @@ namespace CraftingGame
 
         private void OnEnable()
         {
-            Health = MaxHealth;
             IsInvincible = false;
+
+            if (Health > 0) return;
+            Health = MaxHealth;
         }
 
-        public virtual void DealDamage(GameObject attacker, float damage)
+        public virtual void DealDamage(GameObject attacker, float damage, bool useDieEffect = false)
         {
             if (IsInvincible)
                 return;
@@ -44,7 +46,15 @@ namespace CraftingGame
             }
 
             Vector2 damageDir = Vector3.Normalize(transform.position - attacker.transform.position).normalized;
-            healthChangedEffectorBase.DoHitEffect(damageDir);
+            if (!useDieEffect)
+            {
+                healthChangedEffectorBase.DoHitEffect(damageDir);
+            }
+            else
+            {
+                healthChangedEffectorBase.DoDieEffect();
+            }
+
             StartCoroutine(InvincibleCooldown());
 
             OnHealthChanged?.Invoke(new IDamageable.HealthChangedArgs(healthBefore, Health, damage));

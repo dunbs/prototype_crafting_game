@@ -27,7 +27,7 @@ namespace CraftingGame
 
         public abstract IReadOnlyList<ItemBlueprint> Items { get; }
 
-        public abstract int EquippedIndex { get; protected set; }
+        public abstract int EquippedIndex { get; protected set; } 
 
         public abstract void AddToInventory(ItemBlueprint item);
 

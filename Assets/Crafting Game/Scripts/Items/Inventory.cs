@@ -14,7 +14,7 @@ namespace CraftingGame
         public override event Action<EquippedEventArgs> OnItemEquipped;
 
         public override IReadOnlyList<ItemBlueprint> Items => items;
-        public override int EquippedIndex { get; protected set; }
+        public override int EquippedIndex { get; protected set; } = -1;
 
         protected void AddRange(IEnumerable<ItemBlueprint> items)
         {

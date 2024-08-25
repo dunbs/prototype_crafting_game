@@ -711,7 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthChangedEffectorBase: {fileID: 714268220573279439}
   invincibleCooldownTime: 0.5
-  <MaxHealth>k__BackingField: 1
+  <MaxHealth>k__BackingField: 3
 --- !u!114 &714268220573279439
 MonoBehaviour:
   m_ObjectHideFlags: 0

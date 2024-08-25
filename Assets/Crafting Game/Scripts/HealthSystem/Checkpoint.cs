@@ -10,7 +10,7 @@ namespace CraftingGame
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.attachedRigidbody && other.CompareTag("Player"))
+            if (other.attachedRigidbody && other.attachedRigidbody.CompareTag("Player"))
             {
                 checkpointVariable.Value = this;
             }

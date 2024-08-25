@@ -261,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 0}
   speed: 20
-  chasingSpeed: 40
+  chasingSpeed: 60
   characterController2D: {fileID: 3755260936160809427}
   state: 0
   chaseMaxDistance: {x: 10, y: 1}

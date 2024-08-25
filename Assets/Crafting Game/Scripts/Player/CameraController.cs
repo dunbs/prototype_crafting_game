@@ -13,6 +13,7 @@ namespace CraftingGame
         private void Awake()
         {
             Instance = this;
+            transform.SetParent(null);
         }
 
         public void SetConfiner(Collider2D collider2D)

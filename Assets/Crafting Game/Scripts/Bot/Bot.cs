@@ -14,6 +14,7 @@ namespace CraftingGame
 
         [Header("Chase")]
         [SerializeField] private Vector2 chaseMaxDistance = new Vector2(10, 1);
+
         [SerializeField] private DetectionArea detectionArea;
 
         private bool hasDetectionArea;
@@ -93,6 +94,8 @@ namespace CraftingGame
                 characterController2D.Move(0, false, false);
                 return;
             }
+
+            if (!path) return;
 
             Vector3 currentPosition = transform.position;
             Vector3 targetPosition = path.CurrentPositionData.transform.position;

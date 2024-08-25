@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using DG.Tweening;
+using UnityAtoms;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,6 +13,7 @@ namespace CraftingGame
         [SerializeField] private Map[] maps;
         [SerializeField] private UIOpenEvent loadingUIOpenEvent;
         [SerializeField] private UICloseEvent loadingUICloseEvent;
+        [SerializeField] private CheckpointVariable checkpointVariable;
 
         private Map currentMap;
 
@@ -23,7 +25,7 @@ namespace CraftingGame
                 map.OnMapActive += OnMapActive;
             }
 
-            maps.First().gameObject.SetActive(true);
+            maps[0].gameObject.SetActive(true);
         }
 
         private void OnDestroy()
@@ -46,6 +48,7 @@ namespace CraftingGame
         {
             StopAllCoroutines();
             StartCoroutine(Coroutine());
+            return;
 
             IEnumerator Coroutine()
             {
@@ -56,6 +59,24 @@ namespace CraftingGame
                 newMap.gameObject.SetActive(true);
                 var entrance = newMap.Entrances.First(e => e.MapConnection == mapConnection).PlayerPosition;
                 PlayerController.Instance.transform.SetPositionAndRotation(entrance.position, entrance.rotation);
+                yield return new WaitForSeconds(0.3f);
+                loadingUICloseEvent.Raise();
+            }
+        }
+
+        public void RespawnCharacter()
+        {
+            StopAllCoroutines();
+            StartCoroutine(Coroutine());
+            return;
+
+            IEnumerator Coroutine()
+            {
+                loadingUIOpenEvent.Raise();
+                yield return new WaitForSeconds(0.3f);
+                var checkpoint = checkpointVariable.Value.transform;
+                PlayerController.Instance.transform.SetPositionAndRotation(checkpoint.position, checkpoint.rotation);
+                PlayerController.Instance.gameObject.SetActive(true);
                 yield return new WaitForSeconds(0.3f);
                 loadingUICloseEvent.Raise();
             }

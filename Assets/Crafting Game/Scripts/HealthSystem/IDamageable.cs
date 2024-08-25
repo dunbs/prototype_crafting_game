@@ -25,11 +25,13 @@ namespace CraftingGame
             public readonly GameObject attacker;
         }
 
+        public GameObject gameObject { get; }
+
         float MaxHealth { get; }
         float Health { get; }
         event Action<HealthChangedArgs> OnHealthChanged;
         event Action<DieArgs> OnDead;
-        void DealDamage(UnityEngine.GameObject attacker, float damage);
+        void DealDamage(UnityEngine.GameObject attacker, float damage, bool useDieEffect = false);
         void Heal(float amount);
         void Kill();
     }
