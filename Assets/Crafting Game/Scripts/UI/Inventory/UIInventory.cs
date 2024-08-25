@@ -25,6 +25,12 @@ namespace CraftingGame
             base.Awake();
         }
 
+        public override void Open()
+        {
+            base.Open();
+            Refresh();
+        }
+
         private void InteractOnPerformed(InputAction.CallbackContext callback)
         {
             Open();
@@ -48,12 +54,9 @@ namespace CraftingGame
 
         private void OnItemEquipped(InventoryBase.EquippedEventArgs equippedEventArgs)
         {
-            if (equippedEventArgs.index >= 0)
+            for (var i = 0; i < inventoryItems.Count; i++)
             {
-                for (var i = 0; i < inventoryItems.Count; i++)
-                {
-                    inventoryItems[i].SetSelected_NoRaiseEvent(equippedEventArgs.index == i);
-                }
+                inventoryItems[i].SetSelected_NoRaiseEvent(equippedEventArgs.index == i);
             }
         }
 

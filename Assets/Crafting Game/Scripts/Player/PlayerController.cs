@@ -88,7 +88,7 @@ namespace CraftingGame
 
         private void OnItemAddedToInventory(ItemBlueprint itemBlueprint)
         {
-            if (itemBlueprint.prefab is IEquipment && currentEquipment == null)
+            if (itemBlueprint.prefab is IEquipment && currentEquipment.IsUnityNull())
             {
                 inventory.SetEquipped(itemBlueprint);
             }
@@ -96,7 +96,6 @@ namespace CraftingGame
 
         private void OnItemEquipped(InventoryBase.EquippedEventArgs obj)
         {
-            Debug.LogError(obj.ItemBlueprint);
             if (!obj.ItemBlueprint)
             {
                 return;
@@ -119,6 +118,7 @@ namespace CraftingGame
         public void OnBroke(IEquipment equipment)
         {
             inventory.RemoveFromInventory(equipment.ItemBlueprint);
+            currentEquipment = null;
         }
     }
 }

@@ -32,12 +32,17 @@ namespace CraftingGame
             var index = items.IndexOf(item);
             if (index < 0) return;
             items.RemoveAt(index);
-            OnItemRemoved?.Invoke(item);
 
             if (EquippedIndex == index)
             {
                 SetEquipped(-1);
             }
+            else if (EquippedIndex > index)
+            {
+                SetEquipped(EquippedIndex - 1);
+            }
+
+            OnItemRemoved?.Invoke(item);
         }
 
         public override void SetEquipped(ItemBlueprint itemBlueprint)
