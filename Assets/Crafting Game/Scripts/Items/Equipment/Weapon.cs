@@ -7,6 +7,7 @@ namespace CraftingGame
     public class Weapon : Item, IEquipment
     {
         [SerializeField] private int damage = 1;
+        [SerializeField] private int durability = 3;
 
         [Header("Physics")] [SerializeField] private Collider2D[] attackColliders;
         [SerializeField] private Collider2D[] physicsColliders;
@@ -22,13 +23,21 @@ namespace CraftingGame
 
         [SerializeField] private string onAttackFinishedAnimationEventString = "OnAttackFinished";
 
+        private int durabilityLeft = 0;
+
         public AnimationClip AttackAnimationClip => attackAnimationClip;
+        public event Action<IEquipment> OnBroke;
         public IEquipOwner Owner { get; protected set; }
 
         private void Awake()
         {
             orderWhenUnequipped = spriteRenderer.sortingOrder;
             OnAttackFinished();
+        }
+
+        private void OnEnable()
+        {
+            durabilityLeft = durability;
         }
 
         public void Equip(IEquipOwner owner)
@@ -54,6 +63,11 @@ namespace CraftingGame
             {
                 physicsCollider.enabled = false;
             }
+        }
+
+        private void OnDisable()
+        {
+            Owner.AnimationEventTrigger.OnEventTrigger -= OnAnimationTriggered;
         }
 
         private void OnAnimationTriggered(string eventName)
@@ -90,6 +104,13 @@ namespace CraftingGame
             if (component.gameObject == Owner.gameObject) return;
             if (!component.TryGetComponent(out IDamageable damagable)) return;
             damagable.DealDamage(gameObject, damage);
+            durabilityLeft--;
+
+            if (durabilityLeft <= 0)
+            {
+                OnBroke?.Invoke(this);
+                Destroy(gameObject);
+            }
         }
     }
 }

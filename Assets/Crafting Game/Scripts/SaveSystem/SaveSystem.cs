@@ -19,7 +19,7 @@ namespace CraftingGame
                 public List<string> itemBlueprintIds;
                 public int equipped;
 
-                public Data(List<String> itemBlueprintIds, int equipped)
+                public Data(List<string> itemBlueprintIds, int equipped)
                 {
                     this.itemBlueprintIds = itemBlueprintIds;
                     this.equipped = equipped;

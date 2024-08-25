@@ -77,6 +77,7 @@ MonoBehaviour:
   particleSystem: {fileID: 5787573198451611368, guid: 6275ded9fb1e87f43aff1ea3c2cfeac5, type: 3}
   blueprint: {fileID: 11400000, guid: 82f53d738541c4d4999dbf84bc83eaa0, type: 2}
   damage: 1
+  durability: 3
   attackColliders:
   - {fileID: 7903325540403884785}
   physicsColliders:

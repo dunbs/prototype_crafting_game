@@ -2,11 +2,11 @@
 
 namespace CraftingGame
 {
-    public class Axe : Weapon
+    public class Sword : Weapon
     {
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.CompareTag("Tree"))
+            if (other.CompareTag("Tree"))
             {
                 return;
             }

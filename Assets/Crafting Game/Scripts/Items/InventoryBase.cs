@@ -34,5 +34,6 @@ namespace CraftingGame
         public abstract void RemoveFromInventory(ItemBlueprint item);
 
         public abstract void SetEquipped(int index);
+        public abstract void SetEquipped(ItemBlueprint itemBlueprint);
     }
 }

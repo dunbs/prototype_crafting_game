@@ -32,7 +32,7 @@ namespace CraftingGame
         public override void DoDieEffect()
         {
             Instantiate(dieFx.gameObject, transform.position, transform.rotation);
-            DOVirtual.DelayedCall(delayedDieDuration, () => Destroy(gameObject));
+            DOVirtual.DelayedCall(delayedDieDuration, () => gameObject.SetActive(false));
         }
 
         public override void DoHealEffect()

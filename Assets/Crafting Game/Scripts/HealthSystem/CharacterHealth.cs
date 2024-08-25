@@ -17,8 +17,13 @@ namespace CraftingGame
 
         private void Awake()
         {
-            Health = MaxHealth;
             OnHealthChanged?.Invoke(new IDamageable.HealthChangedArgs(before: 0, after: Health, Health));
+        }
+
+        private void OnEnable()
+        {
+            Health = MaxHealth;
+            IsInvincible = false;
         }
 
         public virtual void DealDamage(GameObject attacker, float damage)

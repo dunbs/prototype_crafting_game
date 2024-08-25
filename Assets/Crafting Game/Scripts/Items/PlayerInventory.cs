@@ -7,6 +7,7 @@ namespace CraftingGame
     public class PlayerInventory : Inventory
     {
         [SerializeField] private ItemBlueprintStorage itemBlueprintStorage;
+        [SerializeField] private ItemBlueprint defaultWeapon;
 
         private void Awake()
         {
@@ -15,8 +16,13 @@ namespace CraftingGame
             {
                 foreach (string dataItemBlueprintId in data.itemBlueprintIds)
                 {
-                    AddToInventory(itemBlueprintStorage.GetItemWithId(dataItemBlueprintId));
+                    base.AddToInventory(itemBlueprintStorage.GetItemWithId(dataItemBlueprintId));
                 }
+            }
+            else
+            {
+                base.AddToInventory(defaultWeapon);
+                data.equipped = 0;
             }
 
             EquippedIndex = data.equipped;
@@ -49,7 +55,7 @@ namespace CraftingGame
         {
             SaveSystem.Inventory.Save(new SaveSystem.Inventory.Data
             {
-                itemBlueprintIds = Items.Select(e => e.id).ToList(),
+                itemBlueprintIds = Items.Where(e => e != null).Select(e => e.id).ToList(),
                 equipped = EquippedIndex
             });
         }

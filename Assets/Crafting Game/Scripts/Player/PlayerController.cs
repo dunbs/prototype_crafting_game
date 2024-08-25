@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -52,6 +53,7 @@ namespace CraftingGame
             AnimatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
             animator.runtimeAnimatorController = AnimatorOverrideController;
             inventory.OnItemEquipped += OnItemEquipped;
+            inventory.OnItemAdded += OnItemAddedToInventory;
         }
 
         private void OnEnable()
@@ -84,20 +86,39 @@ namespace CraftingGame
             animator.SetTrigger(AttackHashed);
         }
 
+        private void OnItemAddedToInventory(ItemBlueprint itemBlueprint)
+        {
+            if (itemBlueprint.prefab is IEquipment && currentEquipment == null)
+            {
+                inventory.SetEquipped(itemBlueprint);
+            }
+        }
+
         private void OnItemEquipped(InventoryBase.EquippedEventArgs obj)
         {
+            Debug.LogError(obj.ItemBlueprint);
             if (!obj.ItemBlueprint)
             {
                 return;
             }
 
-            if (currentEquipment != null) Destroy(currentEquipment.gameObject);
+            if (!currentEquipment.IsUnityNull())
+            {
+                currentEquipment.OnBroke -= OnBroke;
+                Destroy(currentEquipment.gameObject);
+            }
 
             var prefab = obj.ItemBlueprint.prefab;
             var item = Instantiate(prefab);
             var equipment = (IEquipment) item;
             equipment.Equip(this);
+            equipment.OnBroke += OnBroke;
             currentEquipment = equipment;
+        }
+
+        public void OnBroke(IEquipment equipment)
+        {
+            inventory.RemoveFromInventory(equipment.ItemBlueprint);
         }
     }
 }

@@ -306,7 +306,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4264592831266863881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac04dfd85b4c40de99385d553fcd2cb2, type: 3}
+  m_Script: {fileID: 11500000, guid: a398d2bf5def4d2088624893e430d023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 2444968514271479046}

@@ -16,7 +16,7 @@ namespace CraftingGame
         public event Action<IDamageable.HealthChangedArgs> OnHealthChanged;
         public event Action<IDamageable.DieArgs> OnDead;
 
-        private void Awake()
+        private void OnEnable()
         {
             Health = MaxHealth;
         }

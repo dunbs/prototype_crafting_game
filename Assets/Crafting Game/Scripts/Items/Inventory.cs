@@ -29,8 +29,20 @@ namespace CraftingGame
 
         public override void RemoveFromInventory(ItemBlueprint item)
         {
-            items.Remove(item);
+            var index = items.IndexOf(item);
+            if (index < 0) return;
+            items.RemoveAt(index);
             OnItemRemoved?.Invoke(item);
+
+            if (EquippedIndex == index)
+            {
+                SetEquipped(-1);
+            }
+        }
+
+        public override void SetEquipped(ItemBlueprint itemBlueprint)
+        {
+            SetEquipped(items.IndexOf(itemBlueprint));
         }
 
         public override void SetEquipped(int index)
