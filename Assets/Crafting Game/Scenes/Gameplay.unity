@@ -265,7 +265,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5881086527253574272, guid: 7800d98adeef2c44a867b5f636881de7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -568,6 +569,10 @@ PrefabInstance:
       propertyPath: 'maps.Array.data[3]'
       value: 
       objectReference: {fileID: 663934448}
+    - target: {fileID: 8087104437118869878, guid: ac55584c79bfcb2469c65ccb5846ea12, type: 3}
+      propertyPath: respawnCheckpointVariable
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e6b6c0a7d2b80842a2244a07b6b7dfe, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -14,6 +14,7 @@ namespace CraftingGame
         [SerializeField] private UIOpenEvent loadingUIOpenEvent;
         [SerializeField] private UICloseEvent loadingUICloseEvent;
         [SerializeField] private CheckpointVariable checkpointVariable;
+        [SerializeField] private CheckpointVariable respawnCheckpointVariable;
 
         private Map currentMap;
 
@@ -26,6 +27,16 @@ namespace CraftingGame
             }
 
             maps[0].gameObject.SetActive(true);
+        }
+
+        private void Start()
+        {
+            PlayerController.Instance.GetComponent<CharacterHealth>().OnDead += OnDead;
+        }
+
+        private void OnDead(IDamageable.DieArgs obj)
+        {
+            ReviveCharacter();
         }
 
         private void OnDestroy()
@@ -75,6 +86,24 @@ namespace CraftingGame
                 loadingUIOpenEvent.Raise();
                 yield return new WaitForSeconds(0.3f);
                 var checkpoint = checkpointVariable.Value.transform;
+                PlayerController.Instance.transform.SetPositionAndRotation(checkpoint.position, checkpoint.rotation);
+                PlayerController.Instance.gameObject.SetActive(true);
+                yield return new WaitForSeconds(0.3f);
+                loadingUICloseEvent.Raise();
+            }
+        }
+
+        private void ReviveCharacter()
+        {
+            StopAllCoroutines();
+            StartCoroutine(Coroutine());
+            return;
+
+            IEnumerator Coroutine()
+            {
+                loadingUIOpenEvent.Raise();
+                yield return new WaitForSeconds(0.3f);
+                var checkpoint = respawnCheckpointVariable.Value.transform;
                 PlayerController.Instance.transform.SetPositionAndRotation(checkpoint.position, checkpoint.rotation);
                 PlayerController.Instance.gameObject.SetActive(true);
                 yield return new WaitForSeconds(0.3f);

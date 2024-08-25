@@ -15,17 +15,13 @@ namespace CraftingGame
         public bool IsInvincible { get; set; }
         public float Health { get; set; }
 
-        private void Awake()
-        {
-            OnHealthChanged?.Invoke(new IDamageable.HealthChangedArgs(before: 0, after: Health, Health));
-        }
-
         private void OnEnable()
         {
             IsInvincible = false;
 
             if (Health > 0) return;
             Health = MaxHealth;
+            OnHealthChanged?.Invoke(new IDamageable.HealthChangedArgs(before: 0, after: Health, Health));
         }
 
         public virtual void DealDamage(GameObject attacker, float damage, bool useDieEffect = false)

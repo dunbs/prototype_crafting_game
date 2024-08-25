@@ -10,6 +10,7 @@ namespace CraftingGame
 
         private MapConnection[] mapConnections;
         private Entrance[] entrances;
+        private ShouldEnableOnMapLoad[] shouldEnableOnMapLoads;
 
         public MapConnection[] MapConnections => mapConnections;
 
@@ -21,12 +22,17 @@ namespace CraftingGame
         {
             entrances = GetComponentsInChildren<Entrance>();
             mapConnections = entrances.Select(e => e.MapConnection).ToArray();
+            shouldEnableOnMapLoads = GetComponentsInChildren<ShouldEnableOnMapLoad>();
         }
 
         private void OnEnable()
         {
             OnMapActive?.Invoke(this, true);
             CameraController.Instance.SetConfiner(confiner);
+            foreach (ShouldEnableOnMapLoad shouldEnableOnMapLoad in shouldEnableOnMapLoads)
+            {
+                shouldEnableOnMapLoad.gameObject.SetActive(true);
+            }
         }
 
         private void OnDisable()

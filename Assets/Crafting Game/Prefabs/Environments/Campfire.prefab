@@ -20084,8 +20084,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8781179557513687434, guid: 173958c6c02981e43b3af7a2b6ffa89e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5249762650783991172}
   m_SourcePrefab: {fileID: 100100000, guid: 173958c6c02981e43b3af7a2b6ffa89e, type: 3}
+--- !u!1 &3778707548673769175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8781179557513687434, guid: 173958c6c02981e43b3af7a2b6ffa89e, type: 3}
+  m_PrefabInstance: {fileID: 5597321462438367069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5249762650783991172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3778707548673769175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b407d2009a24b8fb7cb88161c355178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpointVariable: {fileID: 11400000, guid: 9e6b6c0a7d2b80842a2244a07b6b7dfe, type: 2}
 --- !u!4 &8989766132807876216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3562275408195268901, guid: 173958c6c02981e43b3af7a2b6ffa89e, type: 3}

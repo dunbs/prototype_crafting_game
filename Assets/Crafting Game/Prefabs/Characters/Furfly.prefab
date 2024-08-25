@@ -82,6 +82,8 @@ GameObject:
   - component: {fileID: 3637255498220889487}
   - component: {fileID: 4645643842805241538}
   - component: {fileID: 8718577196488720329}
+  - component: {fileID: 4600326513868992679}
+  - component: {fileID: 5995641325090414155}
   m_Layer: 0
   m_Name: Furfly
   m_TagString: Untagged
@@ -355,6 +357,30 @@ MonoBehaviour:
   damage: 1
   tag: Player
   useTrigger: 0
+--- !u!114 &4600326513868992679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4632798948471717836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598a914d43d944d6a07f47e52abc9db3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5995641325090414155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4632798948471717836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92b2ba3106c4f3ea882777a9dfc85e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4775408605627748647
 GameObject:
   m_ObjectHideFlags: 0

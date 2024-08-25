@@ -14,6 +14,11 @@ namespace CraftingGame
         [SerializeField] private float delayedDieDuration = 1;
         [SerializeField] private float flashDuration = 0.3f;
 
+        private void OnEnable()
+        {
+            whiteRenderer.enabled = false;
+        }
+
         public override void DoHitEffect(Vector3 hitDirection)
         {
             StartCoroutine(FlashCoroutine());

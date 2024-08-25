@@ -807,7 +807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daef56d8d4ac4128967baac5775eb6d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointVariable: {fileID: 11400000, guid: 7d7e13a7e09c72e438593d9a8a226fa0, type: 2}
+  checkpointVariable: {fileID: 11400000, guid: 9e6b6c0a7d2b80842a2244a07b6b7dfe, type: 2}
   respawnerPrefab: {fileID: 11400000, guid: 178de41bc9aaff64ea02dcc0eae19cc2, type: 2}
   delay: 1
 --- !u!114 &3720334426571314029
