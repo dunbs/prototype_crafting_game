@@ -22,15 +22,15 @@ namespace CraftingGame
         {
             foreach (Map map in maps)
             {
+                map.Init();
                 map.gameObject.SetActive(false);
                 map.OnMapActive += OnMapActive;
             }
-
-            maps[0].gameObject.SetActive(true);
         }
 
         private void Start()
         {
+            maps[0].gameObject.SetActive(true);
             PlayerController.Instance.GetComponent<CharacterHealth>().OnDead += OnDead;
         }
 
@@ -103,11 +103,29 @@ namespace CraftingGame
             {
                 loadingUIOpenEvent.Raise();
                 yield return new WaitForSeconds(0.3f);
-                var checkpoint = respawnCheckpointVariable.Value.transform;
-                PlayerController.Instance.transform.SetPositionAndRotation(checkpoint.position, checkpoint.rotation);
+                var checkpoint = respawnCheckpointVariable.Value;
+                PlayerController.Instance.transform.SetPositionAndRotation(checkpoint.transform.position,
+                    checkpoint.transform.rotation);
+                var newMap = FindMapOfCheckpoint(checkpoint);
+                currentMap.gameObject.SetActive(false);
+                newMap.gameObject.SetActive(true);
+                currentMap = newMap;
                 PlayerController.Instance.gameObject.SetActive(true);
                 yield return new WaitForSeconds(0.3f);
                 loadingUICloseEvent.Raise();
+            }
+
+            Map FindMapOfCheckpoint(Checkpoint checkpoint)
+            {
+                foreach (Map map in maps)
+                {
+                    if (checkpoint.transform.IsChildOf(map.transform))
+                    {
+                        return map;
+                    }
+                }
+
+                return null;
             }
         }
     }

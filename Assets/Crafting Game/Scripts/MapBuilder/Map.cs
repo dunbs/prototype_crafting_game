@@ -18,11 +18,11 @@ namespace CraftingGame
 
         public event Action<Map, bool> OnMapActive;
 
-        private void Awake()
+        public void Init()
         {
-            entrances = GetComponentsInChildren<Entrance>();
+            entrances = GetComponentsInChildren<Entrance>(true);
             mapConnections = entrances.Select(e => e.MapConnection).ToArray();
-            shouldEnableOnMapLoads = GetComponentsInChildren<ShouldEnableOnMapLoad>();
+            shouldEnableOnMapLoads = GetComponentsInChildren<ShouldEnableOnMapLoad>(true);
         }
 
         private void OnEnable()

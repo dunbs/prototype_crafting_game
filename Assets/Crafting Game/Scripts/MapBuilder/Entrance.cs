@@ -7,8 +7,8 @@ namespace CraftingGame
     public class Entrance : MonoBehaviour
     {
         [SerializeField] private Transform playerPosition;
-        [SerializeField] private MapConnection mapConnection;
         [SerializeField] private MapConnection targetMapConnection;
+        [SerializeField] private MapConnection mapConnection;
         [SerializeField] private MapManagerVariable mapManagerVariable;
 
         private MapManager mapManager;
