@@ -9,6 +9,8 @@ namespace CraftingGame
 {
     public class PlayerController : MonoBehaviour, IEquipOwner
     {
+        public static PlayerController Instance { get; private set; }
+
         [SerializeField] private CharacterController2D characterController2D;
         [SerializeField] private Animator animator;
         [SerializeField] private float runSpeed;
@@ -45,6 +47,7 @@ namespace CraftingGame
 
         private void Awake()
         {
+            Instance = this;
             simpleControls = new SimpleControls();
             gameplayActions = simpleControls.gameplay;
             gameplayActions.Jump.performed += _ => jump = true;
