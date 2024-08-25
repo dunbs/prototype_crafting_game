@@ -1,4 +1,5 @@
 ﻿using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace CraftingGame
@@ -12,12 +13,17 @@ namespace CraftingGame
         public Item prefab;
 
 #if UNITY_EDITOR
-        [ContextMenu("Generate new id")]
+        [Button("Generate new id")]
         private void GenerateNewId()
         {
             id = UnityEditor.GUID.Generate().ToString();
             UnityEditor.EditorUtility.SetDirty(this);
             UnityEditor.AssetDatabase.SaveAssetIfDirty(this);
+        }
+
+        private void Reset()
+        {
+            GenerateNewId();
         }
 #endif
         public override bool Equals(object other)

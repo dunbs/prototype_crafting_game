@@ -8,17 +8,17 @@ namespace CraftingGame
     public class CraftingTable : MonoBehaviour
     {
         [SerializeField] private Recipe[] recipes;
-        [SerializeField] private int slotCount;
+        // [SerializeField] private int slotCount;
 
         private ItemBlueprint[] itemBlueprints;
 
         public ItemBlueprint[] ItemBlueprints => itemBlueprints;
         public IReadOnlyList<Recipe> Recipes => recipes;
-        public int SlotCount => slotCount;
+        // public int SlotCount => slotCount;
 
         private void Awake()
         {
-            itemBlueprints = new ItemBlueprint[slotCount];
+            // itemBlueprints = new ItemBlueprint[slotCount];
         }
 
         public void SetSlot(int index, ItemBlueprint itemBlueprint)

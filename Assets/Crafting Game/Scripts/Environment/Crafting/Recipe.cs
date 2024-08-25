@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace CraftingGame
 {
-    [CreateAssetMenu(fileName = "Crafting/Recipe", menuName = "Placeholder_Recipe", order = 0)]
+    [CreateAssetMenu(menuName = "Crafting/Recipe", fileName = "Placeholder_Recipe", order = 0)]
     public class Recipe : ScriptableObject
     {
         [field: SerializeField] public ItemBlueprint[] ItemBlueprints { get; private set; }

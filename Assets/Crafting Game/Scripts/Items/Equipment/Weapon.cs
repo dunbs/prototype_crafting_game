@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -35,11 +36,6 @@ namespace CraftingGame
             OnAttackFinished();
         }
 
-        private void OnEnable()
-        {
-            durabilityLeft = durability;
-        }
-
         public void Equip(IEquipOwner owner)
         {
             if (Owner != null)
@@ -62,6 +58,16 @@ namespace CraftingGame
             foreach (Collider2D physicsCollider in physicsColliders)
             {
                 physicsCollider.enabled = false;
+            }
+        }
+
+        private void OnEnable()
+        {
+            durabilityLeft = durability;
+
+            if (!Owner.IsUnityNull())
+            {
+                Owner.AnimationEventTrigger.OnEventTrigger += OnAnimationTriggered;
             }
         }
 

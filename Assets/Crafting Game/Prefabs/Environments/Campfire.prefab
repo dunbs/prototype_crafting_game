@@ -10075,7 +10075,7 @@ MonoBehaviour:
   recipes:
   - {fileID: 11400000, guid: 9a3cbdf3430819f468163b6dc36c3b7e, type: 2}
   - {fileID: 11400000, guid: c8de3c1ca67482c46ab49f0045360f0d, type: 2}
-  slotCount: 0
+  - {fileID: 11400000, guid: db1c3a83513524049a6aabd598c4ac71, type: 2}
 --- !u!114 &4361079198716843824
 MonoBehaviour:
   m_ObjectHideFlags: 0
