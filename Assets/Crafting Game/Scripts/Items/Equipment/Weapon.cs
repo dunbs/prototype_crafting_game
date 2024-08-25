@@ -15,12 +15,14 @@ namespace CraftingGame
         [Header("Equipping")] [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private int orderWhenEquipped = 1;
         private int orderWhenUnequipped;
+        [SerializeField] private AnimationClip attackAnimationClip;
 
         [Header("Animation Event String")] [SerializeField]
         private string onAttackAnimationEventString = "OnAttack";
 
         [SerializeField] private string onAttackFinishedAnimationEventString = "OnAttackFinished";
 
+        public AnimationClip AttackAnimationClip => attackAnimationClip;
         public IEquipOwner Owner { get; protected set; }
 
         private void Awake()
@@ -40,9 +42,14 @@ namespace CraftingGame
             IsPickedUp = true;
             transform.SetParent(Owner.EquipHolderTransform, false);
             transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+
             spriteRenderer.sortingOrder = orderWhenEquipped;
+
             rb2D.isKinematic = true;
+
             Owner.AnimationEventTrigger.OnEventTrigger += OnAnimationTriggered;
+            Owner.AnimatorOverrideController["Sword_Attack"] = attackAnimationClip;
+
             foreach (Collider2D physicsCollider in physicsColliders)
             {
                 physicsCollider.enabled = false;
@@ -77,7 +84,7 @@ namespace CraftingGame
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
             Component component = other.attachedRigidbody ? other.attachedRigidbody : other;
             if (component.gameObject == Owner.gameObject) return;

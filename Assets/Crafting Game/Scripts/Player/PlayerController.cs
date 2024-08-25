@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CraftingGame
@@ -37,6 +40,8 @@ namespace CraftingGame
         public Transform EquipHolderTransform => equipmentPosition;
         public AnimationEventTrigger AnimationEventTrigger => animationEventTrigger;
 
+        public AnimatorOverrideController AnimatorOverrideController { get; private set; }
+
         private void Awake()
         {
             simpleControls = new SimpleControls();
@@ -44,7 +49,8 @@ namespace CraftingGame
             gameplayActions.Jump.performed += _ => jump = true;
             gameplayActions.dash.performed += _ => dash = true;
             gameplayActions.Attack.performed += AttackOnPerformed;
-
+            AnimatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+            animator.runtimeAnimatorController = AnimatorOverrideController;
             inventory.OnItemEquipped += OnItemEquipped;
         }
 
@@ -92,7 +98,6 @@ namespace CraftingGame
             var equipment = (IEquipment) item;
             equipment.Equip(this);
             currentEquipment = equipment;
-            animator.Rebind();
         }
     }
 }

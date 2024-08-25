@@ -12,10 +12,8 @@ namespace CraftingGame
         [SerializeField] private CharacterController2D characterController2D;
         [SerializeField] private State state;
 
-
         [Header("Chase")]
         [SerializeField] private Vector2 chaseMaxDistance = new Vector2(10, 1);
-
         [SerializeField] private DetectionArea detectionArea;
 
         private bool hasDetectionArea;

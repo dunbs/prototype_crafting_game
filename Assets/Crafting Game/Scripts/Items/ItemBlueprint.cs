@@ -26,5 +26,10 @@ namespace CraftingGame
 
             return otherItemBlueprint.id == id;
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode());
+        }
     }
 }
