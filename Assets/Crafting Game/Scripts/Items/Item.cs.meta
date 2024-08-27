@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4e72b89c1b124083af97ba05eb4f4763
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rigidbody2D: {fileID: 2444968514271479046, guid: 195f755db9afbe24bbb2b0aebe5e331a, type: 3}
+  - particleSystem: {instanceID: 0}
+  - blueprint: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
